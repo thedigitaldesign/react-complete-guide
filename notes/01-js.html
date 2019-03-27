@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <style>
+            .person {
+                display: inline-block;
+                margin: 10px;
+                border: solid 1px #eee;
+                box-shadow: 0 2px 2px #ccc;
+                width: 200px;
+                padding: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <script src="https://unpkg.com/react@16.3.1/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16.3.1/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+        <script src="https://unpkg.com/prop-types@15.6.1/prop-types.js"></script>
+
+        <script type="text/babel">
+            const rootElement = document.getElementById('root');
+            
+            class Person extends React.Component {
+                state = {name: null, age: null}
+
+                render() {
+                    return (
+                        <div className="person">
+                            <h1>{this.props.name}</h1>
+                            <p>
+                                Age: {this.props.age}
+                            </p>
+                        </div>
+                    )
+                }
+            }
+
+            const element = (
+                <div>
+                    <Person name="Joshua" age="38" />
+                    <Person name="Ariah" age="3" />
+                    <Person name="Rebekah" age="28" />
+                    <Person name="Marissa" age="14" />
+                </div>
+            )
+
+            ReactDOM.render(element, rootElement)
+        </script>
+    </body>
+</html>
