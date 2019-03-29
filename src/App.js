@@ -12,32 +12,52 @@ class App extends Component {
         otherState: 'Some other value'
     }
 
-    switchStateHandler = () => {
+    updateTableHandler = (newName) => {
         // DON'T DO THIS: this.state.persons[0].name = 'Joshua'
         this.setState({
             persons: [
-                {id: 1, name: 'Joshua', age: 38},
+                {id: 1, name: newName, age: 38},
                 {id: 2, name: 'Human', age: Math.floor(Math.random() * 30), hobbies: 'Hobbies: Shooting pewpew'}
             ]
         })
     }
 
+    updateRowHandler = (id) => {
+        const personBlob = {
+            persons: [
+                {id: 1, name: 'Ariah', age: 3},
+                {id: 2, name: '[5421] Robot V6', age: Math.floor(Math.random() * 30), hobbies: 'Hobbies: Shooting pewpew'}
+            ]
+        }
+    }
+
     render() {
-        console.log(this.state)
+        //console.log(this.state)
 
         return (
             <div className="App">
                 <h1>Hi, I'm a React App! Woo?</h1>
 
-                <button onClick={this.switchStateHandler}>Switch name</button>
-
-                {this.state.persons.map((person) => {
-                    return (
-                        <Person key={person.id} name={person.name} age={person.age} click={this.switchStateHandler}>
-                            {person.hobbies}
-                        </Person>
-                    )
-                })}
+                <button onClick={this.updateTableHandler.bind(this, 'Joshua')}>Update table</button>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Name</td>
+                            <td>Message</td>
+                            <td>Update</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.state.persons.map((person) => {
+                            return (
+                                <Person key={person.id} id={person.id} name={person.name} age={person.age} click={this.updateRowHandler.bind(this, person.id)}>
+                                    {person.hobbies}
+                                </Person>
+                            )
+                        })}
+                    </tbody>
+                </table>
             </div>
         );
     }
