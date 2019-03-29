@@ -1,7 +1,7 @@
 import React from 'react'
 import './Person.css'
 
-//-- NOTE: Argument 'props' could be named anything, but the standard is to use props
+//-- NOTE:  Argument 'props' could be named anything, but the standard is to use props
 //-- NOTE:  Stateless components are called dumb (because they have no internal object) 
 //--        or presentational components because they present something or output content
 const person = (props) => {
