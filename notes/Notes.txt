@@ -226,9 +226,39 @@ Refreshing array functions
         return num * 2
     })
 
+------------------------------------------------------------------------------------------------------------------------------------------------
 
+Creating React app with Node
+- Install node.js
 
+Install Facebook/create-react-app
+> npm install -g create-react-app
 
+Create app
+> create-react-app my-app
+
+Success! Created assignment-1 at D:\Code\Tutorials\React\Udemy\react-complete-guide\assignments\assignment-1
+Inside that directory, you can run several commands:
+
+  npm start
+    Starts the development server.
+
+  npm run build
+    Bundles the app into static files for production.
+
+  npm test
+    Starts the test runner.
+
+  npm run eject
+    Removes this tool and copies build dependencies, configuration files
+    and scripts into the app directory. If you do this, you can’t go back!
+
+We suggest that you begin by typing:
+
+  cd assignment-1
+  npm start
+
+Happy hacking!
 
 
 
