@@ -13,14 +13,25 @@ export default class App extends Component {
         ]
     }
 
-    getUserInput = (event) => {
-        console.log(event.current.value)
+    getUserInputHandler = (event) => {
+        let joined = this.state.UserOutputs.concat({
+            id: this.state.UserOutputs.length + 1, 
+            text: event.current.value
+        })
+
+        this.setUserOutputState(joined)
+
+        event.current.value = ''
+    }
+
+    setUserOutputState = (blob) => {
+        this.setState({ UserOutputs: blob })
     }
 
     render() {
         return (
             <div className="App">
-                <UserInput addToState={this.getUserInput} />
+                <UserInput content={this.getUserInputHandler} />
                 {this.state.UserOutputs.map((output) => {
                     return (
                         <UserOutput key={output.id} text={output.text} />

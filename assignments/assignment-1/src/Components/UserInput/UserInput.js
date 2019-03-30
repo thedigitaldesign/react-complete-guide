@@ -10,17 +10,19 @@ export default class UserInput extends Component {
     
     render() {
         const style = {
+            display: 'block',
             width: '400px',
             height: '200px',
             verticalAlign: 'top'
         }
 
-        //let textarea = this.textareaUpdate
-
         return (
             <div className="user-input-field">
-                <label>New content: <textarea style={style} ref={this.textarea} /></label>
-                <button onClick={this.props.addToState.bind(this, this.textarea)}>Add to state</button>
+                <label>
+                    {!this.props.text ? 'New content' : ''}
+                    <textarea style={style} value={this.props.text} ref={this.textarea} />
+                </label>
+                <button onClick={this.props.content.bind(this, this.textarea)}>{!this.props.text ? 'Add to state' : 'Update state'}</button>
             </div>
         )
     }
