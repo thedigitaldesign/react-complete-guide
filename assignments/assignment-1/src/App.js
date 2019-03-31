@@ -13,8 +13,8 @@ export default class App extends Component {
         ]
     }
 
-    getUserInputHandler = (event) => {
-        let joined = this.state.UserOutputs.concat({
+    userInputHandler = (event) => {
+        const joined = this.state.UserOutputs.concat({
             id: this.state.UserOutputs.length + 1, 
             text: event.current.value
         })
@@ -24,6 +24,12 @@ export default class App extends Component {
         event.current.value = ''
     }
 
+    userOutputHandler = (event) => {
+        //const update = this.state.UserOutputs
+        //const {UserOutputs} = this.state
+
+    }
+
     setUserOutputState = (blob) => {
         this.setState({ UserOutputs: blob })
     }
@@ -31,10 +37,10 @@ export default class App extends Component {
     render() {
         return (
             <div className="App">
-                <UserInput content={this.getUserInputHandler} />
+                <UserInput content={this.userInputHandler} />
                 {this.state.UserOutputs.map((output) => {
                     return (
-                        <UserOutput key={output.id} text={output.text} />
+                        <UserOutput key={output.id} dataKey={output.id} text={output.text} />
                     )
                 })}
             </div>

@@ -7,6 +7,8 @@ export default class UserOutput extends Component {
         this.state = {
             showhide: true
         }
+
+        console.log(this.state)
     }
 
     showhideHandler = () => {
@@ -28,13 +30,13 @@ export default class UserOutput extends Component {
         }
 
         return (
-            <div className="user-output-field">
+            <div data-key={this.props.dataKey} className="user-output-field">
                 { this.state.showhide 
                     ? <p onClick={this.showhideHandler}>{this.props.text}</p> 
                     : <textarea style={style} onClick={''} value={this.props.text} /> }
 
                 { !this.state.showhide 
-                    ? <button onClick={''}>Update state</button>
+                    ? <button onClick={this.showhideHandler}>Update state</button>
                     : null }                        
             </div>
         )
