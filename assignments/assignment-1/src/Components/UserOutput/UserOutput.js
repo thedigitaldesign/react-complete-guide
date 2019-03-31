@@ -1,33 +1,41 @@
 import React, { Component } from 'react'
-import UserInput from '../UserInput/UserInput';
 
 export default class UserOutput extends Component {
     constructor(props) {
         super(props)
 
-        this.show = false;
+        this.state = {
+            showhide: true
+        }
     }
 
-    showhide = (show) => {
-        console.log(this.show)
-        this.show = !this.show
-        console.log(this.show)
+    showhideHandler = () => {
+        console.log(this.state.showhide)
+        this.setState({
+            showhide: !this.state.showhide
+        })
+        console.log(this.state.showhide)
 
-        return this.show
+        return this.state.showhide
     }
 
     render() {
-        let show = this.showhide
+        const style = {
+            display: 'block',
+            width: '400px',
+            height: '200px',
+            verticalAlign: 'top'
+        }
 
         return (
-            //{show ? <p onClick={this.showhide}>{this.props.text}</p> : <UserInput text={this.props.text} />}
-            <div>
-                {/* {show 
-                    ? <p onClick={this.showhide}>{this.props.text}</p> 
-                    : <UserInput text={this.props.text} />} */}
-                {show 
-                    ? <p onClick={this.showhide}>{this.props.text}</p> 
-                    : <textarea value={this.props.text} /> }
+            <div className="user-output-field">
+                { this.state.showhide 
+                    ? <p onClick={this.showhideHandler}>{this.props.text}</p> 
+                    : <textarea style={style} onClick={''} value={this.props.text} /> }
+
+                { !this.state.showhide 
+                    ? <button onClick={''}>Update state</button>
+                    : null }                        
             </div>
         )
     }

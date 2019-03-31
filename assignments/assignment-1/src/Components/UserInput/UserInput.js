@@ -19,7 +19,7 @@ export default class UserInput extends Component {
         return (
             <div className="user-input-field">
                 <label>
-                    {!this.props.text ? 'New content' : ''}
+                    <strong>New content</strong>
                     <textarea style={style} value={this.props.text} ref={this.textarea} />
                 </label>
                 <button onClick={this.props.content.bind(this, this.textarea)}>{!this.props.text ? 'Add to state' : 'Update state'}</button>
