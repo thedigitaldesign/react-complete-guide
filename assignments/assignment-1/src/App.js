@@ -14,21 +14,30 @@ export default class App extends Component {
     }
 
     userInputHandler = (event) => {
-        const blob = {
-            id: this.state.UserOutputs.length + 1, 
-            text: event.current.value
+        if (event.current.value.length) {
+            const state = this.state
+
+            const blob = {
+                id: state.UserOutputs.length + 1, 
+                text: event.current.value
+            }
+    
+            const concat = {
+                UserOutputs: [
+                    ...state.UserOutputs,
+                    blob
+                ]
+            }
+
+            this.setUserOutputState(concat)
+    
+            event.current.value = ''
         }
-
-        console.log('userInputHandler: blob')
-        console.log(blob)
-
-        this.setUserOutputState(this.state.UserOutputs.concat(blob))
-
-        event.current.value = ''
     }
 
     userOutputHandler = (blob) => {
-        const slice = this.state.UserOutputs.slice()
+        const state = this.state
+        const slice = state.UserOutputs.slice()
 
         const id = parseInt(blob[0].id)
         const index = parseInt(blob[0].id - 1)
@@ -36,35 +45,35 @@ export default class App extends Component {
 
         slice[index] = {id: id, text: updatedText}
 
-        const obj = Object.create(slice)
+        let merge = []
+
+        slice.forEach((item) => {
+            merge.push(item)
+        });
+
+        const obj = {
+            UserOutputs: merge
+        }
 
         this.setUserOutputState(obj)
     }
 
     setUserOutputState = (blob) => {
-        console.log('setUserOutputState: blob')
-        console.log(blob)
-
-        this.setState({ 
-            UserOutputs: blob
-        })
+        this.setState(blob)
     }
 
     render() {
+        const state = this.state
         let key = 0
 
         return (
             <div className="App">
-                <p>
-                    <em>Bug: If you edit, then add, state is replaced with the add</em>
-                </p>
-                
                 <UserInput content={this.userInputHandler} />
                 
                 <br />
 
                 <ol>
-                    {this.state.UserOutputs.map((output) => {
+                    {state.UserOutputs.map((output) => {
                         return (
                             <UserOutput key={key += 1} dataId={output.id} text={output.text} click={this.userOutputHandler} />
                         )
