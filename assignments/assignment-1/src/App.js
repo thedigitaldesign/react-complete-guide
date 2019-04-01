@@ -58,12 +58,18 @@ export default class App extends Component {
                 <p>
                     <em>Bug: If you edit, then add, state is replaced with the add</em>
                 </p>
+                
                 <UserInput content={this.userInputHandler} />
-                {this.state.UserOutputs.map((output) => {
-                    return (
-                        <UserOutput key={key += 1} dataId={output.id} text={output.text} click={this.userOutputHandler} />
-                    )
-                })}
+                
+                <br />
+
+                <ol>
+                    {this.state.UserOutputs.map((output) => {
+                        return (
+                            <UserOutput key={key += 1} dataId={output.id} text={output.text} click={this.userOutputHandler} />
+                        )
+                    })}
+                </ol>
             </div>
         )
     }

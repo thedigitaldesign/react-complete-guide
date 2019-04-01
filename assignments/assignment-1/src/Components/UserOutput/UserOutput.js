@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './UserOutput.css'
 
 export default class UserOutput extends Component {
     constructor(props) {
@@ -42,7 +43,7 @@ export default class UserOutput extends Component {
         }
 
         return (
-            <div className="user-output-field">
+            <li className="user-output-field">
                 { this.state.showhide 
                     ? <p onClick={this.showhideHandler}>{this.props.text}</p> 
                     : <textarea style={style} onChange={this.textareaHandler} data-id={this.props.dataId} defaultValue={this.props.text} /> }
@@ -50,7 +51,7 @@ export default class UserOutput extends Component {
                 { !this.state.showhide 
                     ? <button onClick={this.updateStateHandler}>Update state</button>
                     : null }
-            </div>
+            </li>
         )
     }
 }

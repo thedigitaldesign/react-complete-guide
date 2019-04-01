@@ -13,7 +13,8 @@ export default class UserInput extends Component {
             display: 'block',
             width: '400px',
             height: '200px',
-            verticalAlign: 'top'
+            verticalAlign: 'top',
+            margin: '20px auto'
         }
 
         return (
