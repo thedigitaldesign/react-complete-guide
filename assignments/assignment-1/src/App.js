@@ -14,33 +14,54 @@ export default class App extends Component {
     }
 
     userInputHandler = (event) => {
-        const joined = this.state.UserOutputs.concat({
+        const blob = {
             id: this.state.UserOutputs.length + 1, 
             text: event.current.value
-        })
+        }
 
-        this.setUserOutputState(joined)
+        console.log('userInputHandler: blob')
+        console.log(blob)
+
+        this.setUserOutputState(this.state.UserOutputs.concat(blob))
 
         event.current.value = ''
     }
 
-    userOutputHandler = (event) => {
-        //const update = this.state.UserOutputs
-        //const {UserOutputs} = this.state
+    userOutputHandler = (blob) => {
+        const slice = this.state.UserOutputs.slice()
 
+        const id = parseInt(blob[0].id)
+        const index = parseInt(blob[0].id - 1)
+        const updatedText = blob[0].text
+
+        slice[index] = {id: id, text: updatedText}
+
+        const obj = Object.create(slice)
+
+        this.setUserOutputState(obj)
     }
 
     setUserOutputState = (blob) => {
-        this.setState({ UserOutputs: blob })
+        console.log('setUserOutputState: blob')
+        console.log(blob)
+
+        this.setState({ 
+            UserOutputs: blob
+        })
     }
 
     render() {
+        let key = 0
+
         return (
             <div className="App">
+                <p>
+                    <em>Bug: If you edit, then add, state is replaced with the add</em>
+                </p>
                 <UserInput content={this.userInputHandler} />
                 {this.state.UserOutputs.map((output) => {
                     return (
-                        <UserOutput key={output.id} dataKey={output.id} text={output.text} />
+                        <UserOutput key={key += 1} dataId={output.id} text={output.text} click={this.userOutputHandler} />
                     )
                 })}
             </div>
