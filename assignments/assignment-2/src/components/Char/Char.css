@@ -1,0 +1,6 @@
+.char-box {
+    border: solid 1px #333;
+    margin: 2px;
+    padding: 2px 5px;
+    line-height: 20px;
+}
