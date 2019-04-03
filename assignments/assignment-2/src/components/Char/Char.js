@@ -3,24 +3,10 @@ import './Char.css'
 
 export default class Char extends Component {
     render() {
-        let element = (
-            <li className="char-box">
+        return (
+            <li className="char-box" onClick={this.props.click}>
                 {this.props.character}
             </li>
-        )
-
-        if (!this.props.character) {
-            element = (
-                <li>
-                    No characters
-                </li>
-            )
-        }
-
-        return (
-            <div>
-                { element }
-            </div>
         )
     }
 }

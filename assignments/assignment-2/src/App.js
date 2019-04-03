@@ -21,13 +21,27 @@ export default class App extends Component {
     contentLengthOutput = (event) => {
         let content = event.target.value
         let length = event.target.value.length
+
         this.setState({ 
             content: content,
             contentLength: length 
         })
     }
 
+    deleteChar = (charIndex) => {
+        const content = [...this.state.content]
+        content.splice(charIndex, 1)
+        const join = content.join('')
+
+        this.setState({
+            content: join,
+            contentLength: join.length
+        })
+    }
+
     render() {
+        let id = 0
+
         return (
             <div className="App">
                 <div className="container">
@@ -35,7 +49,7 @@ export default class App extends Component {
 
                     <label>
                         <strong>Content</strong>
-                        <textarea defaultValue={this.state.content} onChange={this.contentLengthOutput} />
+                        <textarea value={this.state.content} onChange={this.contentLengthOutput} />
                         <Validation length={this.state.contentLength} />
                     </label>
 
@@ -43,15 +57,15 @@ export default class App extends Component {
 
                     <h5>Character list</h5>
                     <ul className="inline-list">
-                        { this.state.content.split('').map((char) => {
+                        { [...this.state.content].map((char, index) => {
                             return (
-                                <Char character={char} />
+                                <Char key={id += 1} character={char} click={() => this.deleteChar(index)} />
                             )
                         }) }
                     </ul>
                 </div>
             </div>
-        );
+        )
     }
 }
 
