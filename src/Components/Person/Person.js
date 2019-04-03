@@ -1,4 +1,5 @@
 import React from 'react'
+
 import './Person.css'
 
 //-- NOTE:  Argument 'props' could be named anything, but the standard is to use props

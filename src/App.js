@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
+import Person from './components/Person/Person'
+
 import './App.css';
-import Person from './Components/Person/Person'
 
 //-- NOTE:  Stateful components, smart or container components because they contain state
 export default class App extends Component {
     state = {
         persons: [
             {id: 1, name: 'Josh', age: 38},
-            {id: 2, name: 'Human', age: Math.floor(Math.random() * 30), hobbies: 'Hobbies: Shooting pewpew'}
+            {id: 2, name: 'Human', age: Math.floor(Math.random() * 30), hobbies: 'Hobbies: Shooting pewpew'},
+            {id: 3, name: 'Ariah', age: 3},
+            {id: 4, name: 'Marissa', age: 14},
         ],
         otherState: 'Some other value',
         showPersons: false
@@ -50,7 +53,8 @@ export default class App extends Component {
 
     render() {
         const style = {
-            backgroundColor: 'transparent',
+            backgroundColor: 'green',
+            color: '#fff',
             border: 'solid 1px #333',
             padding: '8px 12px',
             fontSize: '1em',
@@ -79,16 +83,39 @@ export default class App extends Component {
                     </ol>
                 </div>
             )
+
+            style.backgroundColor = '#f00'
+        }
+
+        let classes = []
+
+        if (this.state.persons.length <= 2) {
+            classes.push('red') // classes = ['red']
+        }
+        if (this.state.persons.length <= 1) {
+            classes.push('bold') // classes = ['red', 'bold']
         }
 
         return (
             <div className="App">
                 <h1>Hi, I'm a React App! Woo?</h1>
 
-                <button style={style} onClick={this.togglePersonHandler}>Toggle Persons</button>
+                <p className={classes.join(' ')}>
+                    Dynamic classes! woo!
+                </p>
+
+                <button 
+                    style={style} 
+                    onClick={this.togglePersonHandler}>
+                        Toggle persons
+                </button>
                 
                 {persons}
             </div>
         );
     }
 }
+
+//-- NOTE:  This is called a "Higher Order Component." This is a component wrapping your component
+//--        giving your application additional functionality 
+
