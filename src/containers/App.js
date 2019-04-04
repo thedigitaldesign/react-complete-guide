@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Person from '../components/Persons/Person/Person'
-import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary' 
+import Persons from '../components/Persons/Persons'
+import Cockpit from '../components/Cockpit/Cockpit'
 
 import css from './App.module.scss';
 
@@ -66,52 +66,15 @@ export default class App extends Component {
 
         if (this.state.showPersons) {
             persons = (
-                <div>
-                    <ol>    
-                        { this.state.persons.map((person, index) => {
-                            return (
-                                <ErrorBoundary key={person.id}>
-                                    <Person 
-                                        id={person.id} 
-                                        name={person.name} 
-                                        age={person.age} 
-                                        changed={(event) => this.nameChangeHandler(event, person.id)} 
-                                        click={() => this.deletePersonHandler(index)}>
-                                        {person.hobbies}
-                                    </Person>
-                                </ErrorBoundary>
-                            )
-                        }) }
-                    </ol>
-                </div>
+                <Persons persons={this.state.persons} changed={this.nameChangeHandler} clicked={this.deletePersonHandler} />
             )
 
             style.backgroundColor = '#f00'
         }
 
-        let classes = []
-
-        if (this.state.persons.length <= 2) {
-            classes.push(css.red) // classes = ['red']
-        }
-        if (this.state.persons.length <= 1) {
-            classes.push(css.bold) // classes = ['red', 'bold']
-        }
-
         return (
             <div className={css.App}>
-                <h1>Hi, I'm a React App! Woo?</h1>
-
-                <p className={classes.join(' ')}>
-                    Dynamic classes! woo!
-                </p>
-
-                <button 
-                    style={style} 
-                    onClick={this.togglePersonHandler}>
-                        Toggle persons
-                </button>
-                
+                <Cockpit persons={this.state.persons.length} style={style} click={this.togglePersonHandler} />
                 {persons}
             </div>
         );
