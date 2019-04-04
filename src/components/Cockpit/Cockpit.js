@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class Persons extends Component {
+export default class Cockpit extends Component {
     render() {
         return ('')
     }
