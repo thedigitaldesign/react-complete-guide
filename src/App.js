@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import Person from './Components/Person/Person'
+import Person from './Components/Persons/Person/Person'
+import ErrorBoundary from './Components/ErrorBoundary/ErrorBoundary' 
 
-import './App.css';
+import css from './App.module.scss';
 
 //-- NOTE:  Stateful components, smart or container components because they contain state
 export default class App extends Component {
@@ -69,15 +70,16 @@ export default class App extends Component {
                     <ol>    
                         { this.state.persons.map((person, index) => {
                             return (
-                                <Person 
-                                    key={person.id} 
-                                    id={person.id} 
-                                    name={person.name} 
-                                    age={person.age} 
-                                    changed={(event) => this.nameChangeHandler(event, person.id)} 
-                                    click={() => this.deletePersonHandler(index)}>
-                                    {person.hobbies}
-                                </Person>
+                                <ErrorBoundary key={person.id}>
+                                    <Person 
+                                        id={person.id} 
+                                        name={person.name} 
+                                        age={person.age} 
+                                        changed={(event) => this.nameChangeHandler(event, person.id)} 
+                                        click={() => this.deletePersonHandler(index)}>
+                                        {person.hobbies}
+                                    </Person>
+                                </ErrorBoundary>
                             )
                         }) }
                     </ol>
@@ -90,14 +92,14 @@ export default class App extends Component {
         let classes = []
 
         if (this.state.persons.length <= 2) {
-            classes.push('red') // classes = ['red']
+            classes.push(css.red) // classes = ['red']
         }
         if (this.state.persons.length <= 1) {
-            classes.push('bold') // classes = ['red', 'bold']
+            classes.push(css.bold) // classes = ['red', 'bold']
         }
 
         return (
-            <div className="App">
+            <div className={css.App}>
                 <h1>Hi, I'm a React App! Woo?</h1>
 
                 <p className={classes.join(' ')}>
