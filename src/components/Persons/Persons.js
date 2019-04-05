@@ -3,6 +3,8 @@ import Person from './Person/Person'
 
 export default class Persons extends Component {
     render() {
+        console.log('[Persons.js] render')
+
         return (
             <ol>    
                 { this.props.persons.map((person, index) => {

@@ -6,6 +6,11 @@ import css from './App.module.scss';
 
 //-- NOTE:  Stateful components, smart or container components because they contain state
 export default class App extends Component {
+    constructor(props) {
+        super(props)
+        console.log('[App.js] constructor')
+    }
+
     state = {
         persons: [
             {id: 1, name: 'Josh', age: 38},
@@ -15,6 +20,11 @@ export default class App extends Component {
         ],
         otherState: 'Some other value',
         showPersons: false
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        console.log('[App.js] getDerivedStateFromProps', state)
+        return state
     }
 
     nameChangeHandler = (event, id) => {
@@ -53,6 +63,8 @@ export default class App extends Component {
     }
 
     render() {
+        console.log('[App.js] render')
+
         const style = {
             backgroundColor: 'green',
             color: '#fff',
