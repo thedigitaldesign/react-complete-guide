@@ -5,6 +5,25 @@ import Cockpit from '../components/Cockpit/Cockpit'
 import css from './App.module.scss';
 
 //-- NOTE:  Stateful components, smart or container components because they contain state
+
+/*
+    Component Lifecycle - Creation
+        -> Constructor(props)
+        -> getDerivedStateFromProps(props, state) 
+        -> render()
+        -> [Child Components] 
+        -> componentDidMount() [HTTP requests]
+*/
+
+/*
+    Component Lifecycle - Update
+        -> getDerivedStateFromProps(props, state) 
+        -> shouldComponentUpdate(nextProps, nextState) 
+        -> render 
+        -> [Child Components] 
+        -> getSnapshotBeforeUpdate(prevProps, prevState)
+        -> componentDidUpdate() [HTTP requests]
+*/
 export default class App extends Component {
     constructor(props) {
         super(props)
@@ -26,6 +45,21 @@ export default class App extends Component {
         console.log('[App.js] getDerivedStateFromProps', state)
         return state
     }
+
+    //-- NOTE: These three hooks are the most important, and used, hooks when creating an app
+    componentDidMount() {
+        console.log('[App.js] componentDidMount')
+    }
+
+    shouldComponentUpdate = (nextProps, nextState) => {
+        console.log('[App.js] shouldComponentUpdate')
+        return true
+    }
+    
+    componentDidUpdate(prevProps, prevState) {
+        console.log('[App.js] componentDidUpdate', prevState)
+    }
+    //-- END --------------------------------------------------------------------------------
 
     nameChangeHandler = (event, id) => {
         const personIndex = this.state.persons.findIndex((p) => {

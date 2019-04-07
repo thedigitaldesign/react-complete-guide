@@ -1,20 +1,26 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import css from './Person.module.scss'
 
 //-- NOTE:  Argument 'props' could be named anything, but the standard is to use props
 //-- NOTE:  Stateless components are called dumb (because they have no internal object) 
 //--        or presentational components because they present something or output content
-const person = (props) => {
-    return (
-        <li className={css.Person}>
-            <span>I am {props.name}! My human age is {props.age} cycles.... err.... years old!</span>
-            <input type="text" onChange={props.changed} defaultValue={props.name} />
-            { props.children ? <p>{props.children}</p> : '' }
-            {/* <button onClick={props.click}>Edit</button> */}
-            <button onClick={props.click}>Remove</button>
-        </li>
-    )
-}
+export default class Person extends Component {
+    render() {
+        console.log('-> [Person.js] rendering...')
 
-export default person
+        return (
+            <li className={css.Person}>
+                <span>
+                    I am {this.props.name}! My human age is {this.props.age} cycles.... err.... years old!
+                </span>
+
+                <input type="text" onChange={this.props.changed} defaultValue={this.props.name} />
+
+                { this.props.children ? <p>{this.props.children}</p> : '' }
+
+                <button onClick={this.props.click}>Remove</button>
+            </li>
+        )
+    }
+}
