@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 import css from './Cockpit.module.scss'
 
 //-- NOTE: Functional component lifecycle hooks. this is new in React 16
 const Cockpit = (props) => {
+    const toggleButtonRef = useRef(null)
+
     useEffect(() => {
         //-- Mounted
         //-----------------------------
@@ -13,8 +15,10 @@ const Cockpit = (props) => {
         //-- ... HTTP Requests ...
 
         const timer = setTimeout(() => {
-            alert('saved data to cloud!')
+            console.log('----> Saved data to cloud! <----')
         }, 1000);
+
+        toggleButtonRef.current.click()
 
         //-- Unmounted
         //-----------------------------
@@ -38,10 +42,10 @@ const Cockpit = (props) => {
 
     let classes = []
 
-    if (props.persons <= 2) {
+    if (props.length <= 2) {
         classes.push(css.red) // classes = ['red']
     }
-    if (props.persons <= 1) {
+    if (props.length <= 1) {
         classes.push(css.bold) // classes = ['red', 'bold']
     }
 
@@ -55,11 +59,14 @@ const Cockpit = (props) => {
 
             <button 
                 style={props.style} 
-                onClick={props.click}>
+                onClick={props.click}
+                ref={toggleButtonRef}>
                     Toggle persons
             </button>
         </div>
     )
 }
 
-export default Cockpit
+//-- NOTE:  It's a good idea to wrap functional components in React.memo if the component
+//--        might not need to update
+export default React.memo(Cockpit)

@@ -1,16 +1,25 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import Person from './Person/Person'
 
-export default class Persons extends Component {
+//-- NOTE:  PureComponent is a normal component that already implements shouldComponentUpdate 
+//--        with a complete props check and checks for any change on that component
+export default class Persons extends PureComponent {
     // static getDerivedStateFromProps(nextProps, prevState) {
     //     console.log('[Persons.js] getDerivedStateFromProps')
     //     return prevState
     // }
 
-    shouldComponentUpdate = (nextProps, nextState) => {
-        console.log('[Persons.js] shouldComponentUpdate')
-        return true
-    }
+    // shouldComponentUpdate = (nextProps, nextState) => {
+    //     console.log('[Persons.js] shouldComponentUpdate')
+
+    //     if (nextProps.persons !== this.props.persons || 
+    //         nextProps.changed !== this.props.changed || 
+    //         nextProps.clicked !== this.props.clicked) {
+    //         return true
+    //     }
+
+    //     return false
+    // }
     
     //-- NOTE: Save data in state before update
     getSnapshotBeforeUpdate(prevProps, prevState) {

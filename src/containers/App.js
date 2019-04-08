@@ -1,8 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import Persons from '../components/Persons/Persons'
 import Cockpit from '../components/Cockpit/Cockpit'
 
+//-- HOC
+import WithClass from './hoc/WithClass'
+import DIWithClass from './hoc/di-WithClass'
+import Aux from '../containers/hoc/Auxiliary'
+
 import css from './App.module.scss';
+
 
 //-- NOTE:  Stateful components, smart or container components because they contain state
 
@@ -24,7 +30,7 @@ import css from './App.module.scss';
         -> getSnapshotBeforeUpdate(prevProps, prevState)
         -> componentDidUpdate() [HTTP requests]
 */
-export default class App extends Component {
+class App extends Component {
     constructor(props) {
         super(props)
         console.log('[App.js] constructor')
@@ -38,7 +44,8 @@ export default class App extends Component {
             {id: 4, name: 'Marissa', age: 14},
         ],
         otherState: 'Some other value',
-        showPersons: false
+        showPersons: false,
+        changeCounter: 0
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -78,8 +85,13 @@ export default class App extends Component {
         const persons = [...this.state.persons]
         persons[personIndex] = person
 
-        this.setState({
-            persons: persons
+        //-- NOTE:  This is used if you depend on the old state for value changes.
+        //--        setState() is a synchronous call and may not always have the latest state.
+        this.setState((prevState, props) => {
+            return {
+                persons: persons,
+                changeCounter: prevState.changeCounter + 1
+            }
         })
     }
 
@@ -119,14 +131,14 @@ export default class App extends Component {
         }
 
         return (
-            <div className={css.App}>
-                <Cockpit persons={this.state.persons.length} style={style} click={this.togglePersonHandler} />
+            <WithClass classes={css.App}>
+                <Cockpit length={this.state.persons.length} style={style} click={this.togglePersonHandler} />
                 {persons}
-            </div>
+            </WithClass>
         );
     }
 }
 
 //-- NOTE:  This is called a "Higher Order Component." This is a component wrapping your component
 //--        giving your application additional functionality 
-
+export default DIWithClass(App, css.App)

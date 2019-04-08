@@ -1,26 +1,63 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
+import PropTypes from 'prop-types'
+
+//-- HOC
+import Aux from '../../../containers/hoc/Auxiliary'
+import DIWithClass from '../../../containers/hoc/di-WithClass'
 
 import css from './Person.module.scss'
 
 //-- NOTE:  Argument 'props' could be named anything, but the standard is to use props
 //-- NOTE:  Stateless components are called dumb (because they have no internal object) 
 //--        or presentational components because they present something or output content
-export default class Person extends Component {
+class Person extends Component {
+    constructor(props) {
+        super(props)
+
+        this.input_element_ref = React.createRef()
+    }
+
+    componentDidMount() {
+        //this.input_element.focus()
+        this.input_element_ref.current.focus()
+    }
+
     render() {
         console.log('-> [Person.js] rendering...')
 
+        //-- NOTE:  Aux is just being used as an example, the <li> was a fine containing element
+        //-- NOTE:  As of 16.2 React has a built in component called React.Fragment that does the same thing
+        //-- NOTE:  ref={(var_name) => { this.class_property = var_name }}
         return (
-            <li className={css.Person}>
-                <span>
-                    I am {this.props.name}! My human age is {this.props.age} cycles.... err.... years old!
-                </span>
+            <Fragment>
+                <Aux>
+                    <li className={css.Person}>
+                        <span>
+                            I am {this.props.name}! My human age is {this.props.age} cycles.... err.... years old!
+                        </span>
 
-                <input type="text" onChange={this.props.changed} defaultValue={this.props.name} />
+                        <input 
+                            //ref={(input_name) => { this.input_element = input_name }}
+                            ref={this.input_element_ref}
+                            type="text" 
+                            onChange={this.props.changed} 
+                            defaultValue={this.props.name} />
 
-                { this.props.children ? <p>{this.props.children}</p> : '' }
+                        { this.props.children ? <p>{this.props.children}</p> : '' }
 
-                <button onClick={this.props.click}>Remove</button>
-            </li>
+                        <button onClick={this.props.click}>Remove</button>
+                    </li>
+                </Aux>
+            </Fragment>
         )
     }
 }
+
+Person.propTypes = {
+    click: PropTypes.func,
+    name: PropTypes.string,
+    age: PropTypes.number,
+    changed: PropTypes.func
+}
+
+export default DIWithClass(Person, css.Person)
