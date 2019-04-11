@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Persons from '../components/Persons/Persons'
 import Cockpit from '../components/Cockpit/Cockpit'
+import AuthContext from '../components/Context/auth-context'
 
 //-- HOC
 import WithClass from './hoc/WithClass'
@@ -45,7 +46,8 @@ class App extends Component {
         ],
         otherState: 'Some other value',
         showPersons: false,
-        changeCounter: 0
+        changeCounter: 0,
+        authenticated: false
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -108,6 +110,10 @@ class App extends Component {
         this.setState({ showPersons: !doesShow })
     }
 
+    loginHandler = () => {
+        this.setState({ authenticated: true })
+    }
+
     render() {
         console.log('[App.js] render')
 
@@ -124,17 +130,27 @@ class App extends Component {
 
         if (this.state.showPersons) {
             persons = (
-                <Persons persons={this.state.persons} changed={this.nameChangeHandler} clicked={this.deletePersonHandler} />
+                <Persons 
+                    persons={this.state.persons} 
+                    changed={this.nameChangeHandler} 
+                    clicked={this.deletePersonHandler}
+                    isAuthenticated={this.state.authenticated} />
             )
 
             style.backgroundColor = '#f00'
         }
 
         return (
-            <WithClass classes={css.App}>
-                <Cockpit length={this.state.persons.length} style={style} click={this.togglePersonHandler} />
-                {persons}
-            </WithClass>
+            <AuthContext.Provider value={{ authenticated: this.state.authenticated, login: this.loginHandler }}>
+                <WithClass classes={css.App}>
+                    <Cockpit 
+                        length={this.state.persons.length} 
+                        style={style} 
+                        click={this.togglePersonHandler} 
+                        login={this.loginHandler} />
+                    {persons}
+                </WithClass>
+            </AuthContext.Provider>
         );
     }
 }

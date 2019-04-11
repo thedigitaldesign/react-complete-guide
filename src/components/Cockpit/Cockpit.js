@@ -1,10 +1,12 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useContext } from 'react'
+import AuthContext from '../Context/auth-context'
 
 import css from './Cockpit.module.scss'
 
 //-- NOTE: Functional component lifecycle hooks. this is new in React 16
 const Cockpit = (props) => {
     const toggleButtonRef = useRef(null)
+    const authContext = useContext(AuthContext)
 
     useEffect(() => {
         //-- Mounted
@@ -62,6 +64,9 @@ const Cockpit = (props) => {
                 onClick={props.click}
                 ref={toggleButtonRef}>
                     Toggle persons
+            </button>
+            <button onClick={authContext.login}>
+                Log in
             </button>
         </div>
     )

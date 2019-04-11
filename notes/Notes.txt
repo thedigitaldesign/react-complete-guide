@@ -261,9 +261,15 @@ We suggest that you begin by typing:
 Happy hacking!
 
 
+---------------------
+---- SCSS Module ----
+---------------------
+npm install node-sass --save
 
+https://facebook.github.io/create-react-app/docs/adding-a-sass-stylesheet
 
-
+Should you want to preprocess a stylesheet with Sass then make sure to change the stylesheet file extension as 
+follows: [name].module.scss or [name].module.sass.
 
 
 

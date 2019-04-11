@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from 'react'
+import AuthContext from '../../Context/auth-context'
+
 import PropTypes from 'prop-types'
 
 //-- HOC
@@ -17,9 +19,14 @@ class Person extends Component {
         this.input_element_ref = React.createRef()
     }
 
+    static contextType = AuthContext
+
     componentDidMount() {
         //this.input_element.focus()
         this.input_element_ref.current.focus()
+
+        console.log(this.context.authenticated)
+        //console.log(contextType)
     }
 
     render() {
@@ -32,6 +39,8 @@ class Person extends Component {
             <Fragment>
                 <Aux>
                     <li className={css.Person}>
+                        { this.context.authenticated ? <p>Authenticated</p> : <p>Please log in</p> }
+
                         <span>
                             I am {this.props.name}! My human age is {this.props.age} cycles.... err.... years old!
                         </span>
