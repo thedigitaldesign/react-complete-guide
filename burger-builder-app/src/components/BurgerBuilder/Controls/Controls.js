@@ -28,6 +28,11 @@ const Controls = (props) => {
                         disabled={props.disabled[value.type]} />
                 )
             })}
+
+            <button 
+                className={css.OrderButton} 
+                disabled={!props.purchasable}
+                onClick={props.purchasing}>Order now</button>
         </div>
     )
 }
