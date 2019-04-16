@@ -1,5 +1,8 @@
 import React, { Fragment } from 'react'
 
+// Components
+import Button from '../../UI/Button/Button'
+
 const Order = (props) => {
     const summary = Object.keys(props.ingredients).map((key, index) => {
         return (
@@ -9,6 +12,10 @@ const Order = (props) => {
             </li>
         )
     })
+
+    const style = {
+        borderTop: 'solid 1px #ccc'
+    }
 
     return(
         <Fragment>
@@ -22,6 +29,13 @@ const Order = (props) => {
             <p>
                 Continue to checkout?
             </p>
+            <p>
+                <strong>Total Price: ${props.price.toFixed(2)}</strong>
+            </p>
+            <div style={style}>
+                <Button type="Danger" clicked={props.cancel}>Cancel</Button>
+                <Button type="Success" clicked={props.continue}>Continue</Button>
+            </div>
         </Fragment>
     )
 }
