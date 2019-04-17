@@ -19,8 +19,8 @@ const Navigation = (props) => {
     return (
         <div className="collapse navbar-collapse" id="collapsibleNavbar">
             <ul className="navbar-nav">
-                { links.map((item) => {
-                    return <NavigationItem link={item.link} active={item.active}>{item.name}</NavigationItem>
+                { links.map((item, index) => {
+                    return <NavigationItem key={index} link={item.link} active={item.active}>{item.name}</NavigationItem>
                 }) }
             </ul>
         </div>

@@ -1,7 +1,7 @@
 import React, {  } from 'react'
 
 const NavigationItem = (props) => (
-    <li className="nav-item">
+    <li className="">
         <a className={`nav-link ${ props.active ? 'active' : null }`} href={props.link}>{props.children}</a>
     </li>
 )
