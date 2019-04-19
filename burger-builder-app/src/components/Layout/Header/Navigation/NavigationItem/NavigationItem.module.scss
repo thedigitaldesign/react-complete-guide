@@ -1,0 +1,24 @@
+.nav_item_link {
+    color: #8f5c3c;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+
+
+    &:active,
+    &.active {
+        color: #40a4c8;
+    }
+}
+
+@media (min-width: 500px) {
+    .nav_item_link {
+        color: rgba(255,255,255,.5);
+        padding-left: 0;
+        padding-right: 0;
+    
+        &:active,
+        &.active {
+            color: #fff !important;
+        }
+    }
+}
