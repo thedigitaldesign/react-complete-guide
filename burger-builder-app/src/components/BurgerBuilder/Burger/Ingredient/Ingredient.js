@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
 
-// Packages
-import PropTypes from 'prop-types';
-
 // CSS
 import css from './Ingredient.module.scss'
 
@@ -55,8 +52,4 @@ export default class Ingredient extends Component {
 
         return ingredient
     }
-}
-
-Ingredient.propTypes = {
-    type: PropTypes.string.isRequired
 }
