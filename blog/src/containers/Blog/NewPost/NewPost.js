@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+
+// Packages
 import axios from 'axios'
+import { Redirect } from 'react-router-dom'
 
 import css from './NewPost.module.scss';
 
@@ -7,7 +10,12 @@ class NewPost extends Component {
     state = {
         title: '',
         content: '',
-        author: 'Josh'
+        author: 'Josh',
+        submitted: false
+    }
+
+    componentDidMount() {
+        // If unauth => this.props.history.replace('/posts');
     }
 
     postDataHandler = () => {
@@ -19,11 +27,21 @@ class NewPost extends Component {
 
         axios.post('/posts', data)
             .then((response) => {
-                console.log(response)
+                // this.setState({
+                //     submitted: true
+                // })
+
+                this.props.history.push('/posts')
+                
+                //-- NOTE:  history.replace and redirect will replace the page on the stack.
+                //--        You cannot go back to the previous page by hitting the back button.
+                //this.props.history.replace('/posts')
             })
     }
 
     render () {
+        //let redirect = this.state.submitted ? <Redirect to="/posts" /> : null
+
         return (
             <div className={css.NewPost}>
                 <h1>Add a Post</h1>
@@ -47,6 +65,8 @@ class NewPost extends Component {
                     <option value="Manu">Manu</option>
                 </select>
                 <button onClick={this.postDataHandler}>Add Post</button>
+
+                {/* {redirect} */}
             </div>
         );
     }

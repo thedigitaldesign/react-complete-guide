@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 
 // Packages
 import axios from '../../../axios'
-import { Link } from 'react-router-dom'
+import { Link, Route } from 'react-router-dom'
 
 // Components
 import Post from '../../../components/Post/Post'
+import FullPost from '../FullPost/FullPost'
 
 // CSS
 import css from './Posts.module.scss'
@@ -47,7 +48,8 @@ export default class Posts extends Component {
         })
     }
 
-    render () {
+    render() {
+
         let posts = (
             <p style={{ textAlign: 'center' }}>
                 Something went wrong
@@ -57,10 +59,10 @@ export default class Posts extends Component {
         if (!this.state.error) {
             posts = this.state.posts.map((post) => {
                 return (
-                    <Link 
-                        key={post.id} 
+                    <Link
+                        key={post.id}
                         to={{
-                            pathname: '/full-post/' + post.id
+                            pathname: '/posts/' + post.id
                         }}>
                         <Post
                             title={post.title}
@@ -73,9 +75,12 @@ export default class Posts extends Component {
         }
 
         return (
-            <section className={css.Posts}>
-                {posts}
-            </section>
+            <>
+                <section className={css.Posts}>
+                    {posts}
+                </section>
+                <Route path={this.props.match.url + '/:id'} exact component={FullPost} />
+            </>
         )
     }
 }
