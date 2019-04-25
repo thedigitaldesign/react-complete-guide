@@ -1,0 +1,11 @@
+.nav_item_link {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+}
+
+@media (min-width: 500px) {
+    .nav_item_link {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
