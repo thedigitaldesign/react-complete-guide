@@ -8,6 +8,4 @@ const instance = axios.create({
     }
 })
 
-instance.defaults.headers.defaults['Authorization'] = 'd6459f1b'
-
 export default instance
