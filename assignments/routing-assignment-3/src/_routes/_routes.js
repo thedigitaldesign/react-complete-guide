@@ -12,11 +12,11 @@ import Actors from '../components/Actors/Actors'
 const _routes = () => {
     return (
         <>
-            <Route path="/" exact component={Home} />
             <Switch>
                 <Route path="/movies" exact component={Movies} />
                 <Route path="/actors" exact component={Actors} />
                 <Route path="/movie/:id" exact component={MovieDetails} />
+                <Route path="/" exact component={Home} />
             </Switch>
         </>
     )

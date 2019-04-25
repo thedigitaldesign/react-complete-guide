@@ -7,13 +7,11 @@ const Navigation = (props) => {
     const links = [
         { 
             name: 'Home', 
-            link: '/', 
-            active: true 
+            link: '/'
         }, 
         { 
             name: 'Movies', 
-            link: '/movies', 
-            active: true 
+            link: '/movies'
         }, 
         { 
             name: 'Actors', 
@@ -25,7 +23,7 @@ const Navigation = (props) => {
         <div className="navbar-collapse" id="collapsibleNavbar">
             <ul className="navbar-nav">
                 { links.map((item, index) => {
-                    return <NavigationItem key={index} link={item.link} active={item.active}>{item.name}</NavigationItem>
+                    return <NavigationItem key={index} link={item.link}>{item.name}</NavigationItem>
                 }) }
             </ul>
         </div>
