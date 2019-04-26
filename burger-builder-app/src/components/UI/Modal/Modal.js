@@ -1,35 +1,33 @@
 import React, { Component } from 'react';
 
-// Components
-import Backdrop from '../Backdrop/Backdrop'
+import classes from './Modal.module.css';
+import Backdrop from '../Backdrop/Backdrop';
 
-// CSS
-import css from './Modal.module.scss'
+class Modal extends Component {
 
-export default class Modal extends Component {
-    shouldComponentUpdate(nextProps, nextState, nextContext) {
-        return nextProps.show !== this.props.show || nextProps.children !== this.props.children
+    shouldComponentUpdate ( nextProps, nextState ) {
+        return nextProps.show !== this.props.show || nextProps.children !== this.props.children;
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        console.log('====================================');
-        console.log('[Modal] componentDidUpdate');
-        console.log('====================================');
+    componentWillUpdate () {
+        console.log('[Modal] WillUpdate');
     }
 
-    render() {
-        const style = {
-            transform: this.props.show ? 'translateY(0)' : 'translateY(-100vh)',
-            opacity: this.props.show ? '1' : '0'
-        }
-
+    render () {
         return (
             <>
-                <div className={css.Modal} style={style}>
+                <Backdrop show={this.props.show} clicked={this.props.modalClosed} />
+                <div
+                    className={classes.Modal}
+                    style={{
+                        transform: this.props.show ? 'translateY(0)' : 'translateY(-100vh)',
+                        opacity: this.props.show ? '1' : '0'
+                    }}>
                     {this.props.children}
                 </div>
-                <Backdrop show={this.props.show} clicked={this.props.closeModal} />
             </>
         )
     }
 }
+
+export default Modal;

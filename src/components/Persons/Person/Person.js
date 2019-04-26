@@ -37,7 +37,7 @@ class Person extends Component {
         //-- NOTE:  ref={(var_name) => { this.class_property = var_name }}
         return (
             <Fragment>
-                <Aux>
+                <>
                     <li className={css.Person}>
                         { this.context.authenticated ? <p>Authenticated</p> : <p>Please log in</p> }
 
@@ -56,7 +56,7 @@ class Person extends Component {
 
                         <button onClick={this.props.click}>Remove</button>
                     </li>
-                </Aux>
+                </>
             </Fragment>
         )
     }
